@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/Tomcat7FormBasedJAAS">
+
+    <!-- works! -->
+    <Resource name="jdbc/foo4"
+            type="javax.sql.DataSource"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            driverClassName="org.apache.derby.jdbc.ClientDriver"
+            url="jdbc:derby://localhost:1527/nuovodb"
+            username="myusername"
+            password="mypassword"
+            maxActive="8" 
+            maxIdle="4" 
+            maxWait="10000"
+            auth="Container"
+    />
+    <!-- Realm declared only for that web application and not into server.xml!! -->
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+         localDataSource="true"
+         dataSourceName="jdbc/foo4"
+        
+         userTable="users" 
+         userNameCol="username" 
+         userCredCol="password"
+         userRoleTable="users_roles" 
+         roleNameCol="rolename"/>
+</Context>
